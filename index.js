@@ -1,13 +1,14 @@
 const express = require('express')
 const morgan = require('morgan')
+const cors = require('cors')
 
 const app = express()
 app.use(express.json())
+app.use((cors()))
+app.use(express.static('build'))
 
 morgan.token('body', (req, res) => JSON.stringify(req.body))
 const customFormat = ':method :url :status :response-time ms - :body'
-
-// Use the custom format with Morgan middleware
 app.use(morgan(customFormat))
 
 let persons = [
