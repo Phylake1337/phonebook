@@ -11,7 +11,7 @@ const Persons = ({persons, handleDeletation}) =>{
   }
 
 const FilteredPersons = ({persons, nameFilter, handleDeletation}) => {
-    if (nameFilter!=[]) {
+    if (nameFilter!==[]) {
       const filterdPersons = persons.filter(person => person.name.toLowerCase().includes(nameFilter.toLowerCase()))
       return <Persons persons={filterdPersons} handleDeletation={handleDeletation} />
     }else{
