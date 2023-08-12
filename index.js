@@ -14,23 +14,18 @@ app.use(morgan(customFormat))
 let persons = [
     { 
       "id": 1,
-      "name": "Arto Hellas", 
-      "number": "040-123456"
+      "name": "Ahmed Saied", 
+      "number": "0111 022 7362"
     },
     { 
       "id": 2,
-      "name": "Ada Lovelace", 
-      "number": "39-44-5323523"
+      "name": "Ali Salem", 
+      "number": "0100 1765 2324"
     },
     { 
       "id": 3,
-      "name": "Dan Abramov", 
-      "number": "12-43-234345"
-    },
-    { 
-      "id": 4,
-      "name": "Mary Poppendieck", 
-      "number": "39-23-6423122"
+      "name": "Asmaa Nasr", 
+      "number": "0121 100 1099"
     }
 ]
 
