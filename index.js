@@ -51,13 +51,13 @@ app.get('/api/persons/:id', (request, response) => {
 })
 
 const infoResponse = `
-<div> 
-    Phonebook has info for ${persons.length} people 
-</div>
-<div> 
-    ${Date()}
-</div>
-`
+    <div> 
+        Phonebook has info for ${persons.length} people 
+    </div>
+    <div> 
+        ${Date()}
+    </div>
+    `
 
 app.get('/info', (request, response) => {
     response.send(infoResponse)
