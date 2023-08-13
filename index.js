@@ -21,21 +21,31 @@ app.get('/api/persons', (request, response) => {
   })
 
 app.post('/api/persons', (request, response) => {
-const body = request.body
 
-if (body.content === undefined) {
-    return response.status(400).json({ error: 'content missing' })
-}
+    const body = request.body
 
-const person = new Person({
-    name: body.name,
-    number: body.number,
+    console.log(body)
+
+    if (body === undefined) {
+        return response.status(400).json({ error: 'content missing' })
+    }
+
+    const person = new Person({
+        name: body.name,
+        number: body.number,
+    })
+
+    person.save().then(savedperson => {
+        response.json(savedperson)
+    })
 })
 
-person.save().then(savedperson => {
-    response.json(savedperson)
-})
-})
+
+app.get('/api/persons/:id', (request, response) => {
+    Person.findById(request.params.id).then(person => {
+      response.json(person)
+    })
+  })
 
 // const infoResponse = `
 //     <div> 
