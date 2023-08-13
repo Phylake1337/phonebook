@@ -14,43 +14,28 @@ morgan.token('body', (req, res) => JSON.stringify(req.body))
 const customFormat = ':method :url :status :response-time ms - :body'
 app.use(morgan(customFormat))
 
-// let persons = [
-//     { 
-//       "id": 1,
-//       "name": "Ahmed Saied", 
-//       "number": "0111 022 7362"
-//     },
-//     { 
-//       "id": 2,
-//       "name": "Ali Salem", 
-//       "number": "0100 1765 2324"
-//     },
-//     { 
-//       "id": 3,
-//       "name": "Asmaa Nasr", 
-//       "number": "0121 100 1099"
-//     }
-// ]
-// app.get('/api/persons', (request, response) => {
-//     response.json(persons)
-// })
-
-app.get('/api/notes', (request, response) => {
+app.get('/api/persons', (request, response) => {
     Person.find({}).then(notes => {
       response.json(notes)
     })
   })
 
-// app.get('/api/persons/:id', (request, response) => {
-//     const requestId = Number(request.params.id)
-//     const person = persons.find(p => p.id === requestId)
+app.post('/api/persons', (request, response) => {
+const body = request.body
 
-//     if (person){
-//         response.json(person)
-//     }else{
-//         response.status(404).end()
-//     }
-// })
+if (body.content === undefined) {
+    return response.status(400).json({ error: 'content missing' })
+}
+
+const person = new Person({
+    name: body.name,
+    number: body.number,
+})
+
+person.save().then(savedperson => {
+    response.json(savedperson)
+})
+})
 
 // const infoResponse = `
 //     <div> 
