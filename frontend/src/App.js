@@ -15,7 +15,8 @@ const App = () => {
   const [info, setInfo] = useState({ message: null})
 
   useEffect(() => {
-    personService.getAll().then((initialPersons => 
+    personService.getAll()
+    .then((initialPersons => 
       setPersons(initialPersons)
     ))
   }, [])
@@ -38,16 +39,14 @@ const App = () => {
   const updatePerson = (person) => {
     const ok = window.confirm(`${newName} is already added to phonebook, replace the number?`)
     if (ok) {
-      
-      personService.update(person.id, {...person, number: newNumber}).then((updatedPerson) => {
+      personService.update(person.id, {...person, number: newNumber})
+      .then((updatedPerson) => {
         setPersons(persons.map(p => p.id !== person.id ? p :updatedPerson ))
-        notifyWith(`phon number of ${person.name} updated!`)
+        notifyWith(`phone number of ${person.name} updated!`)
       })
-      .catch(() => {
-        notifyWith(`${person.name} has already been removed`, 'error')
-        setPersons(persons.filter(p => p.id !== person.id))
+      .catch((error) => {
+        notifyWith(error.response.data.error, 'error')
       })
-
       cleanForm()
     }
   }
@@ -61,15 +60,14 @@ const App = () => {
       return
     }
 
-    personService.create({
-      name: newName,
-      number: newNumber
-    }).then(createdPerson => {
+    personService.create({name: newName, number: newNumber})
+    .then(createdPerson => {
       setPersons(persons.concat(createdPerson))
-
       notifyWith(`${createdPerson.name} added!`)
-
       cleanForm()
+    })
+    .catch((error) => {
+      notifyWith(error.response.data.error, 'error')
     })
   }
 

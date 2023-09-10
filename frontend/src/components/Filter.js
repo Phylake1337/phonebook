@@ -1,7 +1,7 @@
-const Filter = ({nameFilter, handleNameFilterChange}) => {
+const Filter = ({filter, setFilter}) => {
     return (
         <div>
-            Filter numbers shown by name: <input value={nameFilter} onChange={handleNameFilterChange}/>
+            Filter numbers shown by name: <input value={filter} onChange={({ target }) => setFilter(target.value)}/>                                                                
         </div>
     )
 }
